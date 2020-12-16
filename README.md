@@ -99,3 +99,32 @@
     - kubectl apply -f webhook-service.yaml ([파일](./manifest/webhook-service.yaml))
 
 ## 삭제 가이드
+1. [사용중인 리소스 제거](#Step-1-사용중인-리소스-제거)
+2. [설치 리소스 제거](#Step-2-설치-리소스-제거)
+3. [CRD 제거](#Step-3-CRD-제거)
+
+## Step 1. 사용중인 리소스 제거
+- 목적 : `사용중인 리소스 차례로 제거`
+- 삭제 순서 : 아래 command 순서대로 적용
+    - kubectl delete servicebinding --all --all-namespaces
+    - kubectl delete serviceinstance --all --all-namespaces
+    - kubectl delete servicebinding --all --all-namespaces
+    - kubectl delete clusterservicebroker --all --all-namespaces
+    - kubectl delete servicebroker --all --all-namespaces
+
+## Step 2. 설치 리소스 제거
+- 목적 : `설치에 필요한 pod, service 등의 리소스 제거`
+- 삭제 순서 : 설치에 진행했던 yaml 파일 역순으로 적용
+    - kubectl delete -f webhook-service.yaml ([파일](./manifest/webhook-service.yaml))
+    - kubectl delete -f webhook-deployment.yaml ([파일](./manifest/webhook-deployment.yaml))
+    - kubectl delete -f webhook-register.yaml ([파일](./manifest/webhook-register.yaml))
+    - kubectl delete -f controller-manager-service.yaml ([파일](./manifest/controller-manager-service.yaml))
+    - kubectl delete -f controller-manager-deployment.yaml ([파일](./manifest/controller-manager-deployment.yaml))
+    - kubectl delete -f rbac.yaml ([파일](./manifest/rbac.yaml))
+    - kubectl delete -f serviceaccounts.yaml ([파일](./manifest/serviceaccounts.yaml))
+    - kubectl delete namespace catalog
+
+## Step 3. CRD 제거
+- 목적 : `CRD 제거`
+- 삭제 순서 : 아래 command로 yaml 적용
+    - kubectl delete -f crds/ ([폴더](./manifest/crds)) 
