@@ -36,10 +36,10 @@ spec:
         imagePullPolicy: Always
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 20Mi
           limits:
-            cpu: 100m
+            cpu: 50m
             memory: 30Mi
         env:
         - name: K8S_NAMESPACE

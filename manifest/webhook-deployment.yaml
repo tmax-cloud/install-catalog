@@ -32,6 +32,12 @@ spec:
         image: quay.io/kubernetes-service-catalog/service-catalog:v0.3.0
         imagePullPolicy: Always
         resources:
+         requests:
+           cpu: 30m
+           memory: 20Mi
+         limits:
+           cpu: 50m
+           memory: 30Mi
         args:
         - webhook
         - --secure-port
@@ -79,4 +85,3 @@ spec:
             path: tls.crt
           - key: tls.key
             path: tls.key
-
