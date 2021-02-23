@@ -32,14 +32,14 @@ spec:
           emptyDir: {}
       containers:
       - name: controller-manager
-        image: quay.io/kubernetes-service-catalog/service-catalog:v0.3.0
+        image: {imageRegistry}/kubernetes-service-catalog/service-catalog:v{catalogVersion}
         imagePullPolicy: Always
         resources:
           requests:
-            cpu: 100m
+            cpu: 30m
             memory: 20Mi
           limits:
-            cpu: 100m
+            cpu: 50m
             memory: 30Mi
         env:
         - name: K8S_NAMESPACE
