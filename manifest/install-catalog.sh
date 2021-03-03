@@ -65,11 +65,11 @@ function uninstall_catalog(){
     echo  "========================================================================="
     echo  "=======================  start uninstall catalog  ======================"
     echo  "========================================================================="
-    kubectl delete servicebinding --all --all-namespaces
-    kubectl delete serviceinstance --all --all-namespaces
-    kubectl delete servicebinding --all --all-namespaces
-    kubectl delete clusterservicebroker --all --all-namespaces
-    kubectl delete servicebroker --all --all-namespaces
+    timeout 1m kubectl delete servicebinding --all --all-namespaces
+    timeout 1m kubectl delete serviceinstance --all --all-namespaces
+    timeout 1m kubectl delete servicebinding --all --all-namespaces
+    timeout 1m kubectl delete clusterservicebroker --all --all-namespaces
+    timeout 1m kubectl delete servicebroker --all --all-namespaces
     kubectl delete -f ${yaml_dir}/webhook-service.yaml
     kubectl delete -f ${yaml_dir}/webhook-deployment.yaml
     kubectl delete -f ${yaml_dir}/webhook-register.yaml
@@ -77,7 +77,7 @@ function uninstall_catalog(){
     kubectl delete -f ${yaml_dir}/controller-manager-deployment.yaml
     kubectl delete -f ${yaml_dir}/rbac.yaml
     kubectl delete -f ${yaml_dir}/serviceaccounts.yaml
-    kubectl delete namespace catalog
+    timeout 1m kubectl delete namespace catalog
     kubectl delete -f ${crd_dir}/
     echo  "========================================================================="
     echo  "=======================  complete uninstall catalog  ======================"
@@ -97,8 +97,8 @@ function main(){
     *)
         set +x
         echo " service list:" >&2
-        echo "  $0 install-catalog" >&2
-        echo "  $0 uninstall-catalog" >&2
+        echo "  $0 install" >&2
+        echo "  $0 uninstall" >&2
         ;;
     esac
 }
