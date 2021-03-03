@@ -70,12 +70,12 @@ spec:
               description: CatalogRestrictions is a set of restrictions on which of a broker's services and plans have resources created for them.
               properties:
                 serviceClass:
-                  description: ServiceClass represents a selector for plans, used to filter catalog re-lists. The format is expected to be <property><conditional><requirement>. <property> is allowed to be one of the following:\ spec.externalName, spec.externalID. <conditional> is allowed to be one of the following:\ ==, !=, in, notin. <requirement> will be a string value if == or != are used, otherwise it will be a set of string values if in or notin are used.
+                  description: 'ServiceClass represents a selector for plans, used to filter catalog re-lists. The format is expected to be <property><conditional><requirement>. <property> is allowed to be one of the following: spec.externalName, spec.externalID. <conditional> is allowed to be one of the following: ==, !=, in, notin. <requirement> will be a string value if == or != are used, otherwise it will be a set of string values if in or notin are used.'
                   items:
                     type: string
                   type: array
                 servicePlan:
-                  description: ServicePlan represents a selector for classes, used to filter catalog re-lists. The format is expected to be <property><conditional><requirement>. <property> is allowed to be one of the following:\ spec.externalName, spec.externalID, spec.free, spec.clusterServiceClass.name. <conditional> is allowed to be one of the following:\ ==, !=, in, notin. <requirement> will be a string value if == or != are used, otherwise it will be a set of string values if in or notin are used.
+                  description: 'ServicePlan represents a selector for classes, used to filter catalog re-lists. The format is expected to be <property><conditional><requirement>. <property> is allowed to be one of the following: spec.externalName, spec.externalID, spec.free, spec.clusterServiceClass.name. <conditional> is allowed to be one of the following: ==, !=, in, notin. <requirement> will be a string value if == or != are used, otherwise it will be a set of string values if in or notin are used.'
                   items:
                     type: string
                   type: array
@@ -86,8 +86,8 @@ spec:
             relistBehavior:
               description: RelistBehavior specifies the type of relist behavior the catalog should exhibit when relisting ServiceClasses available from a broker.
               enum:
-                - duration
-                - manual
+                - Duration
+                - Manual
               type: string
             relistDuration:
               description: RelistDuration is the frequency by which a controller will relist the broker when the RelistBehavior is set to ServiceBrokerRelistBehaviorDuration. Users are cautioned against configuring low values for the RelistDuration, as this can easily overload the controller manager in an environment with many brokers. The actual interval is intrinsically governed by the configured resync interval of the controller, which acts as a minimum bound. For example, with a resync interval of 5m and a RelistDuration of 2m, relists will occur at the resync interval of 5m.
