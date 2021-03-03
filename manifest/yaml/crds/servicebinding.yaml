@@ -137,28 +137,6 @@ spec:
                     type: object
                 type: object
               type: array
-            userInfo:
-              description: "Currently, this field is ALPHA: it may change or disappear at any time and its data will not be migrated. \n UserInfo contains information about the user that last modified this ServiceBinding. This field is set by the API server and not settable by the end-user. User-provided values for this field are not saved."
-              properties:
-                extra:
-                  additionalProperties:
-                    description: ExtraValue contains additional information about a user that may be provided by the authenticator.
-                    items:
-                      type: string
-                    type: array
-                  type: object
-                groups:
-                  items:
-                    type: string
-                  type: array
-                uid:
-                  type: string
-                username:
-                  type: string
-              required:
-              - uid
-              - username
-              type: object
           required:
           - instanceRef
           type: object
