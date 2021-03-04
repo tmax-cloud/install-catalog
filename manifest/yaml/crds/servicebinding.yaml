@@ -36,9 +36,6 @@ spec:
         spec:
           description: Spec represents the desired state of a ServiceBinding.
           properties:
-            externalID:
-              description: "ExternalID is the identity of this object for use with the OSB API. \n Immutable."
-              type: string
             instanceRef:
               description: "InstanceRef is the reference to the Instance this ServiceBinding is to. \n Immutable."
               properties:
