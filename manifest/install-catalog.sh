@@ -70,15 +70,15 @@ function uninstall_catalog(){
     timeout 1m kubectl delete servicebinding --all --all-namespaces
     timeout 1m kubectl delete clusterservicebroker --all --all-namespaces
     timeout 1m kubectl delete servicebroker --all --all-namespaces
-    kubectl delete -f ${yaml_dir}/webhook-service.yaml
-    kubectl delete -f ${yaml_dir}/webhook-deployment.yaml
-    kubectl delete -f ${yaml_dir}/webhook-register.yaml
-    kubectl delete -f ${yaml_dir}/controller-manager-service.yaml
-    kubectl delete -f ${yaml_dir}/controller-manager-deployment.yaml
-    kubectl delete -f ${yaml_dir}/rbac.yaml
-    kubectl delete -f ${yaml_dir}/serviceaccounts.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/webhook-service.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/webhook-deployment.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/webhook-register.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/controller-manager-service.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/controller-manager-deployment.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/rbac.yaml
+    timeout 1m kubectl delete -f ${yaml_dir}/serviceaccounts.yaml
     timeout 1m kubectl delete namespace catalog
-    kubectl delete -f ${crd_dir}/
+    timeout 1m kubectl delete -f ${crd_dir}/
     echo  "========================================================================="
     echo  "=======================  complete uninstall catalog  ======================"
     echo  "========================================================================="
