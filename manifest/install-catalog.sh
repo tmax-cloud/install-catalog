@@ -23,6 +23,20 @@ function set_env(){
     sed -i "s|{catalogVersion}|${catalogVersion}|g" ${yaml_dir}/controller-manager-deployment.yaml
     sed -i "s|{imageRegistry}|${imageRegistry}|g" ${yaml_dir}/webhook-deployment.yaml
     sed -i "s|{catalogVersion}|${catalogVersion}|g" ${yaml_dir}/webhook-deployment.yaml
+
+    openssl genrsa -out rootca.key 2048
+    openssl req -x509 -new -nodes -key rootca.key -sha256 -days 3650 -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out rootca.crt
+    openssl req -new -newkey rsa:2048 -sha256 -nodes -keyout server.key -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out server.csr
+    openssl x509 -req -in server.csr -CA rootca.crt -CAkey rootca.key -CAcreateserial -out server.crt -days 3650 -sha256 -extfile ./${ca_dir}/v3.ext
+    openssl base64 -in rootca.crt > key0
+    openssl base64 -in server.crt > cert
+    openssl base64 -in server.key > key
+    key0=$(awk 'NF {sub(/\r/, ""); printf "%s",$0;}' key0)
+    cert=$(awk 'NF {sub(/\r/, ""); printf "%s",$0;}' cert)
+    key=$(awk 'NF {sub(/\r/, ""); printf "%s",$0;}' key)
+    sed -i "s|{{ b64enc \$ca.Cert }}|${key0}|g" ${yaml_dir}/webhook-register.yaml
+    sed -i "s|{{ b64enc \$cert.Cert }}|${cert}|g" ${yaml_dir}/webhook-register.yaml
+    sed -i "s|{{ b64enc \$cert.Key }}|${key}|g" ${yaml_dir}/webhook-register.yaml
 }
 
 function install_catalog(){
@@ -38,21 +52,7 @@ function install_catalog(){
     #3. create catalog manager
     kubectl apply -f ${yaml_dir}/controller-manager-deployment.yaml
     kubectl apply -f ${yaml_dir}/controller-manager-service.yaml
-    #4. create cert
-    openssl genrsa -out rootca.key 2048
-    openssl req -x509 -new -nodes -key rootca.key -sha256 -days 3650 -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out rootca.crt
-    openssl req -new -newkey rsa:2048 -sha256 -nodes -keyout server.key -subj /C=KO/ST=None/L=None/O=None/CN=catalog-catalog-webhook -out server.csr
-    openssl x509 -req -in server.csr -CA rootca.crt -CAkey rootca.key -CAcreateserial -out server.crt -days 3650 -sha256 -extfile ./${ca_dir}/v3.ext
-    openssl base64 -in rootca.crt > key0
-    openssl base64 -in server.crt > cert
-    openssl base64 -in server.key > key
-    key0=$(awk 'NF {sub(/\r/, ""); printf "%s",$0;}' key0)
-    cert=$(awk 'NF {sub(/\r/, ""); printf "%s",$0;}' cert)
-    key=$(awk 'NF {sub(/\r/, ""); printf "%s",$0;}' key)
-    sed -i "s|{{ b64enc \$ca.Cert }}|${key0}|g" ${yaml_dir}/webhook-register.yaml
-    sed -i "s|{{ b64enc \$cert.Cert }}|${cert}|g" ${yaml_dir}/webhook-register.yaml
-    sed -i "s|{{ b64enc \$cert.Key }}|${key}|g" ${yaml_dir}/webhook-register.yaml
-    #5. create catalog-webhook
+    #4. create catalog-webhook
     kubectl apply -f ${yaml_dir}/webhook-register.yaml
     kubectl apply -f ${yaml_dir}/webhook-deployment.yaml
     kubectl apply -f ${yaml_dir}/webhook-service.yaml
