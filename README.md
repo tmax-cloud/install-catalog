@@ -2,6 +2,8 @@
 # CatalogContoller 설치 가이드
 
 ## 구성 요소 및 버전
+- latest image: quay.io/kubernetes-service-catalog/service-catalog:v0.3.0
+- latest version: 0.3.0
 
 ## Prerequisites
 - template을 사용하고자 하는 경우, install-tsb 프로젝트를 참고하여 선 설치 해주시기 바랍니다.
