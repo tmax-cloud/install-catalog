@@ -43,10 +43,10 @@
    docker load < service-catalog_v${CATALOG_VERSION}.tar
 
    # 이미지 Tag
-   docker tag quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} ${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
+   docker tag quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} ${REGISTRY}/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
 
    # 이미지 Push
-   docker push ${REGISTRY}/quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
+   docker push ${REGISTRY}/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
    ```
 
 ## 설치 가이드
