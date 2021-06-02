@@ -11,43 +11,7 @@
 ## 폐쇄망 구축 가이드
 
 1. 사용하는 image를 다운받고 저장합니다.
-
-   - 작업 디렉토리 생성 및 환경 설정
-
-   ```bash
-   mkdir -p ~/catalog-controller-install
-   export CATALOG_HOME=~/catalog-controller-install
-   export CATALOG_VERSION=0.3.0
-   cd $CATALOG_HOME
-   ```
-
-   - 외부 네트워크 통신이 가능한 환경에서 필요한 이미지를 다운받습니다.
-
-   ```bash
-   # TEMPLATE SERVICE BROKER 이미지 Pull
-   docker pull quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
-
-   # 이미지 Save
-   docker save quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} > service-catalog_v${CATALOG_VERSION}.tar
-   ```
-
-2. 폐쇄망으로 이미지 파일(.tar)을 옮깁니다.
-
-3. 폐쇄망에서 사용하는 image repository에 이미지를 push 합니다.
-
-   ```bash
-   # 이미지 레지스트리 주소
-   REGISTRY=[IP:PORT]
-
-   # 이미지 Load
-   docker load < service-catalog_v${CATALOG_VERSION}.tar
-
-   # 이미지 Tag
-   docker tag quay.io/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION} ${REGISTRY}/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
-
-   # 이미지 Push
-   docker push ${REGISTRY}/kubernetes-service-catalog/service-catalog:v${CATALOG_VERSION}
-   ```
+   - [install-registry 이미지 푸시하기 참조](https://github.com/tmax-cloud/install-registry/blob/5.0/podman.md)
 
 ## 설치 가이드
 1. [설치에 필요한 crd 생성](#Step-1-설치에-필요한-crd-생성)
