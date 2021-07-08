@@ -3,7 +3,7 @@
 install_dir=$(dirname "$0")
 . ${install_dir}/catalog.config
 yaml_dir="${install_dir}/yaml"
-crd_dir="${yaml_dir}/crds"
+crd_dir="${yaml_dir}/crds/key-mapping"
 ca_dir="${install_dir}/ca"
 
 function set_env(){
