@@ -4,6 +4,7 @@
 ## 개요
 외부의 Service를 서비스 카탈로그로 제공받기 위한 카탈로그 컨트롤러.
 Service Broker instance를 통하여 서비스를 제공하는 broker를 등록함.
+①이 카탈로그 컨트롤러에 해당.
 
 ![image](https://raw.githubusercontent.com/tmax-cloud/install-tsb/tsb-5.0/manifest/TSB.PNG)
 
