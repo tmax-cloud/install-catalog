@@ -1,6 +1,13 @@
 
 # CatalogContoller 설치 가이드
 
+## 개요
+외부의 Service를 서비스 카탈로그로 제공받기 위한 카탈로그 컨트롤러.
+Service Broker instance를 통하여 서비스를 제공하는 broker를 등록함.
+
+![image](https://raw.githubusercontent.com/tmax-cloud/install-tsb/tsb-5.0/manifest/TSB.PNG)
+
+
 ## 구성 요소 및 버전
 - latest image: quay.io/kubernetes-service-catalog/service-catalog:v0.3.0
 - latest version: 0.3.0
