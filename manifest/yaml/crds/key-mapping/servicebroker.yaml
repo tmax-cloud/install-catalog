@@ -40,7 +40,7 @@ spec:
             description: '%servicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.kind'
             type: string
           metadata:
-            description: '%servicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.metadata'
+            # description: '%servicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.metadata'
             type: object
           spec:
             description: '%servicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.spec'

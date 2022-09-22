@@ -40,7 +40,8 @@ spec:
             description: '%clusterservicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.kind'
             type: string
           metadata:
-            description: '%clusterservicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.metadata'
+            # metadata 필드에 description 포함되면 에러 발생
+            # description: '%clusterservicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.metadata'
             type: object
           spec:
             description: '%clusterservicebroker.yaml.spec.versions.schema.openAPIV3Schema.properties.spec'
